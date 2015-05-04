@@ -1,0 +1,12 @@
+'comment': 'OpenMP rules for Fortran.'
+'name': 'Fortran - OpenMP'
+'scopeName': 'source.openmp'
+'fileTypes': []
+'injectionSelector': 'source.fortran'
+'patterns': [
+  {'include': '#pragma-omp'}
+]
+'repository':
+  'pragma-omp':
+    'name': 'keyword.control.openmp'
+    'match': '(?i)(omp)\\b'

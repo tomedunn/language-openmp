@@ -1,0 +1,4 @@
+'.source.openmp':
+  'Allocate Array':
+    'prefix': 'al'
+    'body': 'allocate(${1:array}, stat=${2:err})\nif ($2 /= 0) print *, "${1/(\\w+).*/$1/}: Allocation request denied"\n'

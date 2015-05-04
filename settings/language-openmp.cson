@@ -1,0 +1,7 @@
+'.source.openmp':
+  'editor':
+    'completions': [
+      'module procedure'
+      'operator'
+      'assignment(=)'
+    ]
