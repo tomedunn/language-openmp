@@ -2,11 +2,172 @@
 'name': 'Fortran - OpenMP'
 'scopeName': 'source.openmp'
 'fileTypes': []
-'injectionSelector': 'source.fortran'
+'injectionSelector': 'source.fortran comment'
 'patterns': [
-  {'include': '#pragma-omp'}
+  {
+    'name': 'meta.openmp.directive'
+    'begin': '(?i)(\\$omp)\\b'
+    'beginCaptures':
+      '1': 'name': 'keyword.control.openmp'
+    'end': '(?=[$\\n])'
+    'patterns':[
+      {'include': '#environment-variables'}
+      {'include': '#intrinsic-functions'}
+      {'include': '#parallel-directive'}
+      {'include': '#do-directive'}
+      {'include': '#declare-directive'}
+      {'include': '#distribute-directive'}
+      {'include': '#end-atomic-directive'}
+      {'include': '#end-critical-directive'}
+      {'include': '#end-distribute-directive'}
+      {'include': '#end-do-directive'}
+      {'include': '#end-master-directive'}
+      {'include': '#end-ordered-directive'}
+      {'include': '#end-parallel-directive'}
+      {'include': '#end-sections-directive'}
+      {'include': '#end-simd-directive'}
+      {'include': '#end-single-directive'}
+      {'include': '#end-target-directive'}
+      {'include': '#end-task-directive'}
+      {'include': '#end-teams-directive'}
+      {'include': '#end-workshare-directive'}
+      {'include': '#parallel-directive'}
+      {'include': '#target-directive'}
+      {'include': '#teams-directive'}
+    ]
+  }
 ]
 'repository':
-  'pragma-omp':
+  # directives:
+  'do-directive':
     'name': 'keyword.control.openmp'
-    'match': '(?i)(omp)\\b'
+    'match': '(?i)\\b(do(\\s*simd)?)\\b'
+  'declare-directive':
+    'name': 'keyword.control.openmp'
+    'match': '(?i)\\b(declare(\\s*reduction|\\s*simd|\\s*target)?)\\b'
+  'distribute-directive':
+    'name': 'keyword.control.openmp'
+    'match': '(?i)\\b(distribute(\\s*parallel\\s*do)?(\\s*simd)?)\\b'
+  'parallel-directive':
+    'name': 'keyword.control.openmp'
+    'match': '(?i)\\b(parallel(\\s*do(\\s*simd)?|\\s*sections|\\s*workshare)?)\\b'
+  'target-directive':
+    'name': 'keyword.control.openmp'
+    'match': '(?i)\\b(target(\\s*data|teams(\\s*distribute(\\s*parallel\\s*do)?(\\s*simd)?)?|\\s*update)?)\\b'
+  'teams-directive':
+    'name': 'keyword.control.openmp'
+    'match': '(?i)\\b(teams(\\s*distribute(\\s*parallel\\s*do)?(\\s*simd)?)?)\\b'
+  'shared-directive':
+    'name': 'keyword.control.openmp'
+    'match': '(?i)\\b(shared)\\b'
+  # end directives:
+  'end-atomic-directive':
+    'name': 'keyword.control.openmp'
+    'match': '(?i)\\b(end\\s*atomic)\\b'
+  'end-critical-directive':
+    'name': 'keyword.control.openmp'
+    'match': '(?i)\\b(end\\s*critical)\\b'
+  'end-distribute-directive':
+    'name': 'keyword.control.openmp'
+    'match': '(?i)\\b(end\\s*distribute(\\s*parallel\\s*do)?(\\s*simd)?)\\b'
+  'end-do-directive':
+    'name': 'keyword.control.openmp'
+    'match': '(?i)\\b(end\\s*do(\\s*simd)?)\\b'
+  'end-master-directive':
+    'name': 'keyword.control.openmp'
+    'match': '(?i)\\b(end\\s*master)\\b'
+  'end-ordered-directive':
+    'name': 'keyword.control.openmp'
+    'match': '(?i)\\b(end\\s*ordered)\\b'
+  'end-parallel-directive':
+    'name': 'keyword.control.openmp'
+    'match': '(?i)\\b(end\\s*parallel(\\s*do(\\s*simd)?|\\s*sections|\\s*workshare)?)\\b'
+  'end-sections-directive':
+    'name': 'keyword.control.openmp'
+    'match': '(?i)\\b(end\\s*sections)\\b'
+  'end-simd-directive':
+    'name': 'keyword.control.openmp'
+    'match': '(?i)\\b(end\\s*simd)\\b'
+  'end-single-directive':
+    'name': 'keyword.control.openmp'
+    'match': '(?i)\\b(end\\s*single)\\b'
+  'end-target-directive':
+    'name': 'keyword.control.openmp'
+    'match': '(?i)\\b(end\\s*target(\\s*data|\\s*teams(\\s*distribute(\\s*parallel\\s*do)?(\\s*simd)?)?|\\s*update)?)\\b'
+  'end-task-directive':
+    'name': 'keyword.control.openmp'
+    'match': '(?i)\\b(end\\s*task(\\s*group)?)\\b'
+  'end-teams-directive':
+    'name': 'keyword.control.openmp'
+    'match': '(?i)\\b(end\\s*teams(\\s*distribute(\\s*parallel\\s*do)?(\\s*simd)?)?)\\b'
+  'end-workshare-directive':
+    'name': 'keyword.control.openmp'
+    'match': '(?i)\\b(end\\s*workshare)\\b'
+  # environment variables
+  'environment-variables':
+    'patterns':[
+      {
+        'name': 'variable.parameter.openmp'
+        'match': '(?i)\\b(omp_dynamic)\\b'
+      }
+      {
+        'name': 'variable.parameter.openmp'
+        'match': '(?i)\\b(omp_nested)\\b'
+      }
+      {
+        'name': 'variable.parameter.openmp'
+        'match': '(?i)\\b(omp_num_threads)\\b'
+      }
+      {
+        'name': 'variable.parameter.openmp'
+        'match': '(?i)\\b(omp_schedule)\\b'
+      }
+      {
+        'name': 'variable.parameter.openmp'
+        'match': '(?i)\\b(omp_proc_bind)\\b'
+      }
+      {
+        'name': 'variable.parameter.openmp'
+        'match': '(?i)\\b(omp_stacksize)\\b'
+      }
+      {
+        'name': 'variable.parameter.openmp'
+        'match': '(?i)\\b(omp_wait_policy)\\b'
+      }
+      {
+        'name': 'variable.parameter.openmp'
+        'match': '(?i)\\b(omp_thread_limit)\\b'
+      }
+      {
+        'name': 'variable.parameter.openmp'
+        'match': '(?i)\\b(omp_max_active_levels)\\b'
+      }
+      {
+        'name': 'variable.parameter.openmp'
+        'match': '(?i)\\b(omp_places)\\b'
+      }
+      {
+        'name': 'variable.parameter.openmp'
+        'match': '(?i)\\b(omp_cancelation)\\b'
+      }
+      {
+        'name': 'variable.parameter.openmp'
+        'match': '(?i)\\b(omp_default_device)\\b'
+      }
+    ]
+  # environment variables
+  'intrinsic-functions':
+    'patterns':[
+      {
+        'begin': '(?i)\\b(omp_(get|set)_(dynamic|nested|num_threads|schedule))\\s*(\\()'
+        'beginCaptures':
+          '1': 'name': 'support.function.intrinsic.openmp'
+          '2': 'name': 'punctuation.parentheses.left.openmp'
+        'end': '(\\))'
+        'endCaptures':
+          '1': 'name': 'punctuation.parentheses.left.openmp'
+        'patterns':[
+          {'include': '$self'}
+        ]
+      }
+    ]
