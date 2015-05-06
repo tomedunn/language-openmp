@@ -6,7 +6,7 @@
 'patterns': [
   {
     'name': 'meta.openmp.directive'
-    'begin': '(?i)(\\$omp)\\b'
+    'begin': '(?i)\\G(\\$(omp\\b)?)'
     'beginCaptures':
       '1': 'name': 'keyword.control.openmp'
     'end': '(?=[$\\n])'
@@ -16,10 +16,211 @@
       {'include': '#operators'}
       {'include': '#end-directives'}
       {'include': '#directives'}
+      {'include': '#clauses'}
     ]
   }
 ]
 'repository':
+  # clauses:
+  'clauses':
+    'patterns':[
+      {
+        'begin': '(?i)\\b(collapse)\\s*(\\()'
+        'beginCaptures':
+          '1': 'name': 'keyword.control.openmp'
+          '2': 'name': 'punctuation.parentheses.left.openmp'
+        'end': '(\\))'
+        'endCaptures':
+          '1': 'name': 'punctuation.parentheses.right.openmp'
+        'patterns':[
+          {
+            'name': 'constant.numeric.openmp'
+            'match': '\\G\\s*\\d+'
+          }
+          {'include': '#invalid-word'}
+        ]
+      }
+      {
+        'begin': '(?i)\\b(copyin)\\s*(\\()'
+        'beginCaptures':
+          '1': 'name': 'keyword.control.openmp'
+          '2': 'name': 'punctuation.parentheses.left.openmp'
+        'end': '(\\))'
+        'endCaptures':
+          '1': 'name': 'punctuation.parentheses.right.openmp'
+        'patterns':[
+          {'include': '#variable-list'}
+        ]
+      }
+      {
+        'begin': '(?i)\\b(default)\\s*(\\()'
+        'beginCaptures':
+          '1': 'name': 'keyword.control.openmp'
+          '2': 'name': 'punctuation.parentheses.left.openmp'
+        'end': '(\\))'
+        'endCaptures':
+          '1': 'name': 'punctuation.parentheses.right.openmp'
+        'patterns':[
+          {
+            'name': 'keyword.control.openmp'
+            'match': '(?i)\\G(firstprivate|none|private|shared)'
+          }
+          {'include': '#invalid-word'}
+        ]
+      }
+      {
+        'begin': '(?i)\\b(firstprivate)\\s*(\\()'
+        'beginCaptures':
+          '1': 'name': 'keyword.control.openmp'
+          '2': 'name': 'punctuation.parentheses.left.openmp'
+        'end': '(\\))'
+        'endCaptures':
+          '1': 'name': 'punctuation.parentheses.right.openmp'
+        'patterns':[
+          {'include': '#variable-list'}
+        ]
+      }
+      {
+        'begin': '(?i)\\b(if)\\s*(\\()'
+        'beginCaptures':
+          '1': 'name': 'keyword.control.openmp'
+          '2': 'name': 'punctuation.parentheses.left.openmp'
+        'end': '(\\))'
+        'endCaptures':
+          '1': 'name': 'punctuation.parentheses.right.openmp'
+        'patterns':[
+          {'include': '$self'}
+        ]
+      }
+      {
+        'begin': '(?i)\\b(lastprivate)\\s*(\\()'
+        'beginCaptures':
+          '1': 'name': 'keyword.control.openmp'
+          '2': 'name': 'punctuation.parentheses.left.openmp'
+        'end': '(\\))'
+        'endCaptures':
+          '1': 'name': 'punctuation.parentheses.right.openmp'
+        'patterns':[
+          {'include': '#variable-list'}
+        ]
+      }
+      {
+        'name': 'keyword.control.openmp'
+        'match': '(?i)\\b(ordered)\\b'
+      }
+      {
+        'name': 'keyword.control.openmp'
+        'match': '(?i)\\b(nowait)\\b'
+      }
+      {
+        'begin': '(?i)\\b(num_threads)\\s*(\\()'
+        'beginCaptures':
+          '1': 'name': 'keyword.control.openmp'
+          '2': 'name': 'punctuation.parentheses.left.openmp'
+        'end': '(\\))'
+        'endCaptures':
+          '1': 'name': 'punctuation.parentheses.right.openmp'
+        'patterns':[
+          {'include': '$self'}
+        ]
+      }
+      {
+        'begin': '(?i)\\b(private)\\s*(\\()'
+        'beginCaptures':
+          '1': 'name': 'keyword.control.openmp'
+          '2': 'name': 'punctuation.parentheses.left.openmp'
+        'end': '(\\))'
+        'endCaptures':
+          '1': 'name': 'punctuation.parentheses.right.openmp'
+        'patterns':[
+          {'include': '#variable-list'}
+        ]
+      }
+      {
+        'begin': '(?i)\\b(proc_bind)\\s*(\\()'
+        'beginCaptures':
+          '1': 'name': 'keyword.control.openmp'
+          '2': 'name': 'punctuation.parentheses.left.openmp'
+        'end': '(\\))'
+        'endCaptures':
+          '1': 'name': 'punctuation.parentheses.right.openmp'
+        'patterns':[
+          {
+            'name': 'keyword.control.openmp'
+            'match': '(?i)\\G(close|master|spread)'
+          }
+          {'include': '#invalid-word'}
+        ]
+      }
+      {
+        'begin': '(?i)\\b(reduction)\\s*(\\()'
+        'beginCaptures':
+          '1': 'name': 'keyword.control.openmp'
+          '2': 'name': 'punctuation.parentheses.left.openmp'
+        'end': '(\\))'
+        'endCaptures':
+          '1': 'name': 'punctuation.parentheses.right.openmp'
+        'patterns':[
+          {
+            'begin': '\\G(?=\\s*[^\\)\\n])'
+            'end': '(:)|(?=\\))'
+            'endCaptures':
+              '1': 'name': 'operator.colon.openmp'
+            'patterns':[
+              {
+                'name': 'keyword.control.openmp'
+                'match': '(?i)\\G\\s*(\\+|\\-|\\*|\\.and\\.|\\.or\\.|\\.eqv\\.|\\.neqv\\.|\\b(max|min|iand|ior|ieor)\\b)'
+              }
+              {'include': '#invalid-word'}
+            ]
+          }
+          {'include': '#variable-list'}
+        ]
+      }
+      {
+        'begin': '(?i)\\b(schedule)\\s*(\\()'
+        'beginCaptures':
+          '1': 'name': 'keyword.control.openmp'
+          '2': 'name': 'punctuation.parentheses.left.openmp'
+        'end': '(\\))'
+        'endCaptures':
+          '1': 'name': 'punctuation.parentheses.right.openmp'
+        'patterns':[
+          {
+            'begin': '(?i)\\G\\s*(dynamic|guided|static)\\b'
+            'beginCaptures':
+              '1': 'name': 'keyword.control.openmp'
+            'end': '(?=\\))'
+            'patterns':[
+              {
+                'begin': '\\G\\s*(,)'
+                'beginCaptures':
+                  '1': 'name': 'punctuation.comma.openmp'
+                'end': '(?=\\))'
+              }
+              {'include': '#invalid-word'}
+            ]
+          }
+          {
+            'name': 'keyword.control.openmp'
+            'match': '(?i)\\G\\s*\\b(auto|runtime)\\b'
+          }
+          {'include': '#invalid-word'}
+        ]
+      }
+      {
+        'begin': '(?i)\\b(shared)\\s*(\\()'
+        'beginCaptures':
+          '1': 'name': 'keyword.control.openmp'
+          '2': 'name': 'punctuation.parentheses.left.openmp'
+        'end': '(\\))'
+        'endCaptures':
+          '1': 'name': 'punctuation.parentheses.right.openmp'
+        'patterns':[
+          {'include': '#variable-list'}
+        ]
+      }
+    ]
   # directives:
   'directives':
     'patterns':[
@@ -238,3 +439,7 @@
         ]
       }
     ]
+  #other:
+  'invalid-word':
+    'name': 'invalid.error.openmp'
+    'match': '(?i)\\b\\w+\\b'
