@@ -6,7 +6,7 @@
   "bugs": "https://github.com/tomedunn/language-openmp/issues",
   "license": "MIT",
   "engines": {
-    "atom": ">0.50.0"
+    "atom": "*"
   },
   "keywords": [
     "grammar",
