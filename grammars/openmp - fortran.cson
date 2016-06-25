@@ -259,6 +259,21 @@
         'name': 'keyword.control.openmp'
         'match': '(?i)\\b(shared)\\b'
       }
+      {
+        'comment': 'single-directive'
+        'name': 'keyword.control.openmp'
+        'match': '(?i)\\b(single)\\b'
+      }
+      {
+        'comment': 'task-directive'
+        'name': 'keyword.control.openmp'
+        'match': '(?i)\\b(task)\\b'
+      }
+      {
+        'comment': 'workshare-directive'
+        'name': 'keyword.control.openmp'
+        'match': '(?i)\\b(workshare)\\b'
+      }
     ]
   # end directives:
   'end-directives':
