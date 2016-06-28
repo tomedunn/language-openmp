@@ -245,14 +245,9 @@
         'match': '(?i)\\b(parallel(\\s*do(\\s*simd)?|\\s*sections|\\s*workshare)?)\\b'
       }
       {
-        'comment': 'target-directive'
+        'comment': 'sections-directive'
         'name': 'keyword.control.openmp'
-        'match': '(?i)\\b(target(\\s*data|teams(\\s*distribute(\\s*parallel\\s*do)?(\\s*simd)?)?|\\s*update)?)\\b'
-      }
-      {
-        'comment': 'teams-directive'
-        'name': 'keyword.control.openmp'
-        'match': '(?i)\\b(teams(\\s*distribute(\\s*parallel\\s*do)?(\\s*simd)?)?)\\b'
+        'match': '(?i)\\b(sections)\\b'
       }
       {
         'comment': 'shared-directive'
@@ -265,9 +260,24 @@
         'match': '(?i)\\b(single)\\b'
       }
       {
+        'comment': 'target-directive'
+        'name': 'keyword.control.openmp'
+        'match': '(?i)\\b(target(\\s*data|teams(\\s*distribute(\\s*parallel\\s*do)?(\\s*simd)?)?|\\s*update)?)\\b'
+      }
+      {
         'comment': 'task-directive'
         'name': 'keyword.control.openmp'
         'match': '(?i)\\b(task)\\b'
+      }
+      {
+        'comment': 'teams-directive'
+        'name': 'keyword.control.openmp'
+        'match': '(?i)\\b(teams(\\s*distribute(\\s*parallel\\s*do)?(\\s*simd)?)?)\\b'
+      }
+      {
+        'comment': 'threadprivate-directive'
+        'name': 'keyword.control.openmp'
+        'match': '(?i)\\b(threadprivate)\\b'
       }
       {
         'comment': 'workshare-directive'
