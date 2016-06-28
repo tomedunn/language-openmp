@@ -1,6 +1,6 @@
 {
   "name": "language-openmp",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Syntax highlighting for OpenMP in atom ",
   "repository": "https://github.com/tomedunn/language-openmp",
   "bugs": "https://github.com/tomedunn/language-openmp/issues",
